@@ -23,13 +23,8 @@ void handler_message(int sig_msg, siginfo_t *info, void *nting)
         chr = 0;
     }
     if (sig_msg == SIGUSR2)
-    {
         chr |= (1 << cont_bit);    
-        cont_bit--;
-    }
-    else if (sig_msg == SIGUSR1)
-        cont_bit--;
-
+    cont_bit--;
     if (cont_bit == -1)
     {
         write(1, &chr, 1);
@@ -46,7 +41,6 @@ int main()
     print_pid(getpid());
     write (1,"\n",1);
     sg.sa_sigaction = handler_message;
-    // sigemptyset(&sg.sa_mask);
     sg.sa_flags = SA_SIGINFO;
     sigaction(SIGUSR1, &sg, NULL);
     sigaction(SIGUSR2, &sg, NULL);

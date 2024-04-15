@@ -20,7 +20,7 @@ void send_bits(int pid, char *msg)
             else    
                 kill (pid, SIGUSR1);
             tol.bit--;
-            usleep (200);
+            usleep (90);
         }
         tol.i++;
     }
