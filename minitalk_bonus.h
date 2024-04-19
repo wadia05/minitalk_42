@@ -1,5 +1,5 @@
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 #include <unistd.h>  //for write()
 #include <signal.h>  //for kill(), struct sigaction,usleep()....
@@ -24,6 +24,7 @@ typedef struct s_tools
 
 //client
 void send_bits(int pid, char *msg);
+void msg_back(int sig);
 void send_sig(char k,int bit,int pid);
 int pid(char k,int num);
 

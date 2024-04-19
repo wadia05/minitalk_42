@@ -1,4 +1,4 @@
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 int cont_bit = 7;
 
@@ -31,6 +31,8 @@ void handler_message(int sig_msg, siginfo_t *info, void *nting)
     {
         write(1, &chr, 1);
         cont_bit = 7;
+        if (chr == '\0')
+            kill(cl_pid,SIGUSR2);
         chr = 0;
     }
     (void)nting;

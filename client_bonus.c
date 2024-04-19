@@ -1,8 +1,13 @@
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 int pid(char k,int num)
 {
     num = num * 10 + (k - '0');
     return num;
+}
+void msg_back(int sig) 
+{
+    if (sig == SIGUSR2)
+        write(1, GREEN"Message Received\n", 17 + sizeof(GREEN) -1);
 }
 
 void send_sig(char k,int bit,int pid)
@@ -48,6 +53,7 @@ int main(int ac, char **av)
     }
     if (tol.pid <= 0)
         exit(write(2, YELLOW"PID NOT EXIST\n", 14+sizeof(YELLOW)-1));
+    signal(SIGUSR2, msg_back);
     send_bits(tol.pid,av[2]);
     return 0;
 }
