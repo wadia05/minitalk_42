@@ -6,43 +6,67 @@
 #    By: wait-bab <wait-bab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 11:59:19 by wait-bab          #+#    #+#              #
-#    Updated: 2024/04/23 11:59:20 by wait-bab         ###   ########.fr        #
+#    Updated: 2024/04/24 18:40:02 by wait-bab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CL = client
-SV = server
-
-CLB = client_bonus
-SVB = server_bonus
+NAME = client
+NAME_BONUS = client_bonus
+NAME_2 = server
+NAME_BONUS_2 = server_bonus
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
-OBJC = client.c
-OBJS = server.c
+OBJC = mandatory/client.c
+OBJS = mandatory/server.c
+OBJCb = bonus/client_bonus.c
+OBJSb = bonus/server_bonus.c
+HEDER = mandatory/minitalk.h
+HEDER_B = bonus/minitalk_bonus.h
 
-OBJCb = client_bonus.c
-OBJSb = server_bonus.c
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_BLUE=\033[0;34m
+COLOUR_END=\033[0m
 
-HEDER = minitalk.h
-HEDER_B = minitalk_bonus.h
-all:$(SV) $(CL) 
+all: $(NAME_2) $(NAME)
 
-$(SV): $(OBJS) $(HEDER)
+$(NAME_2): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
-$(CL): $(OBJC)
+	@echo "$(COLOUR_GREEN)███╗   ███╗██╗███╗   ██╗██╗████████╗ █████╗ ██╗     ██╗  ██╗"
+	@echo "████╗ ████║██║████╗  ██║██║╚══██╔══╝██╔══██╗██║     ██║ ██╔╝ "
+	@echo "██╔████╔██║██║██╔██╗ ██║██║   ██║   ███████║██║     █████╔╝"
+	@echo "██║╚██╔╝██║██║██║╚██╗██║██║   ██║   ██╔══██║██║     ██╔═██╗ "
+	@echo "██║ ╚═╝ ██║██║██║ ╚████║██║   ██║   ██║  ██║███████╗██║  ██╗ "
+	@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ "
+	@echo "$(COLOUR_GREEN)\
+█▀ █░█ █▀▀ █▀▀ █▀▀ █▀ █▀ █▀▀ █░█ █░░ █░░ █▄█   █▀▀ █▀█ █▀▄▀█ █▀█ █ █░░ █▀▀ █▀▄\n\
+▄█ █▄█ █▄▄ █▄▄ ██▄ ▄█ ▄█ █▀░ █▄█ █▄▄ █▄▄ ░█░   █▄▄ █▄█ █░▀░█ █▀▀ █ █▄▄ ██▄ █▄▀$(COLOUR_END)"
+	
+$(NAME): $(OBJC) $(HEDER)
 	$(CC) $(CFLAGS) $(OBJC) -o $@
+	
+bonus : $(NAME_BONUS) $(NAME_BONUS_2)
 
-bonus : $(SVB) $(CLB)
-
-$(SVB): $(OBJSb) $(HEDER_B)
+$(NAME_BONUS_2): $(OBJSb) $(HEDER_B)
 	$(CC) $(CFLAGS) $(OBJSb) -o $@
-$(CLB): $(OBJCb)
+		@echo "$(COLOUR_BLUE)██████╗  ██████╗ ███╗   ██╗██╗   ██╗███████╗"
+	@echo "██╔══██╗██╔═══██╗████╗  ██║██║   ██║██╔════╝"
+	@echo "██████╔╝██║   ██║██╔██╗ ██║██║   ██║███████╗"
+	@echo "██╔══██╗██║   ██║██║╚██╗██║██║   ██║╚════██║"
+	@echo "██████╔╝╚██████╔╝██║ ╚████║╚██████╔╝███████║"
+	@echo "╚═════╝  ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝"
+	@echo "$(COLOUR_BLUE)\
+█▀ █░█ █▀▀ █▀▀ █▀▀ █▀ █▀ █▀▀ █░█ █░░ █░░ █▄█   █▀▀ █▀█ █▀▄▀█ █▀█ █ █░░ █▀▀ █▀▄\n\
+▄█ █▄█ █▄▄ █▄▄ ██▄ ▄█ ▄█ █▀░ █▄█ █▄▄ █▄▄ ░█░   █▄▄ █▄█ █░▀░█ █▀▀ █ █▄▄ ██▄ █▄▀$(COLOUR_END)"
+	
+$(NAME_BONUS): $(OBJCb) $(HEDER_B)
 	$(CC) $(CFLAGS) $(OBJCb) -o $@
+	
 clean:
-	$(RM) $(CL) $(SV) $(CLB) $(SVB)
+	$(RM) $(NAME) $(NAME_2) $(NAME_BONUS) $(NAME_BONUS_2)
 
 fclean: clean
 
